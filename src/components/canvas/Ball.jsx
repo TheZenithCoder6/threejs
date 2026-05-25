@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import {
   Decal,
   Float,
@@ -9,9 +9,14 @@ import {
 } from "@react-three/drei";
 import CanvasLoader from "./Loader";
 
+const SceneBg = () => {
+  const { scene } = useThree();
+  scene.background = null;
+  return null;
+};
+
 const Ball = (props) => {
   const [decal] = useTexture([props.imgUrl]);
-
   return (
     <Float speed={1.75} rotationIntensity={1} floatIntensity={2}>
       <ambientLight intensity={0.25} />
@@ -19,7 +24,7 @@ const Ball = (props) => {
       <mesh castShadow receiveShadow scale={2.75}>
         <icosahedronGeometry args={[1, 1]} />
         <meshStandardMaterial
-          color="#5f678f"
+          color='#5f678f'
           polygonOffset
           polygonOffsetFactor={-5}
           flatShading
@@ -39,16 +44,23 @@ const Ball = (props) => {
 const BallCanvas = ({ icon }) => {
   return (
     <Canvas
-      frameloop="always"             
-      dpr={[1, 2]}                   
+      frameloop='always'
+      dpr={[1, 2]}
       gl={{
         preserveDrawingBuffer: true,
-        powerPreference: "high-performance",  
-        antialias: false,            
-        alpha: true,                 
+        alpha: true,
+        antialias: false,
       }}
-      camera={{ fov: 45 }}          
+      style={{
+        position: "absolute",   
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        background: "transparent",
+      }}
     >
+      <SceneBg />
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls enableZoom={false} />
         <Ball imgUrl={icon} />
