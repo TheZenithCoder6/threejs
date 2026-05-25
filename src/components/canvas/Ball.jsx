@@ -9,6 +9,9 @@ import {
 } from "@react-three/drei";
 import CanvasLoader from "./Loader";
 
+// ✅ Mobile detect karo
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 const SceneBg = () => {
   const { scene } = useThree();
   scene.background = null;
@@ -42,6 +45,35 @@ const Ball = (props) => {
 };
 
 const BallCanvas = ({ icon }) => {
+  // ✅ Mobile pe sirf image dikhao — no WebGL
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#1a1a2e",
+          borderRadius: "50%",
+          padding: "18px",
+        }}
+      >
+        <img
+          src={icon}
+          alt="tech"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+          }}
+        />
+      </div>
+    );
+  }
+
+  // ✅ Desktop pe 3D Ball
   return (
     <Canvas
       frameloop='always'
@@ -52,7 +84,7 @@ const BallCanvas = ({ icon }) => {
         antialias: false,
       }}
       style={{
-        position: "absolute",   
+        position: "absolute",
         top: 0,
         left: 0,
         width: "100%",
