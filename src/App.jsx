@@ -1,0 +1,46 @@
+import {BrowserRouter } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import './App.css'
+import ComputersCanvas from './components/canvas/Computers'
+import About from './components/About'
+import Experience from './components/Experience'
+import Tech from './components/Tech'
+import Works from './components/Works'
+<<<<<<< HEAD
+import Feedbacks from './components/feedbacks'; 
+=======
+>>>>>>> da5c8d0 (Force fix: Correcting Case Sensitivity for Feedbacks)
+import Contact from './components/Contact'
+import Feedbacks from './components/feedbacks';
+import StarsCanvas from "./components/canvas/Stars";
+
+function App() {
+
+  return (
+    
+      <BrowserRouter>
+      <div className='relative z-0 bg-primary'>
+        <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
+          <Navbar />
+          <Hero />
+        </div>
+        
+        <About />
+        <Experience />
+        <Tech />
+        <Works />
+        <Feedbacks />
+        
+        <div className='relative z-0'>
+          <Contact />
+          <StarsCanvas />
+        </div>
+      </div>
+    </BrowserRouter>
+      
+  
+  )
+}
+
+export default App
