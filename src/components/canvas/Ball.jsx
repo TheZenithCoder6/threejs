@@ -7,7 +7,6 @@ import {
   Preload,
   useTexture,
 } from "@react-three/drei";
-
 import CanvasLoader from "./Loader";
 
 const Ball = (props) => {
@@ -20,7 +19,7 @@ const Ball = (props) => {
       <mesh castShadow receiveShadow scale={2.75}>
         <icosahedronGeometry args={[1, 1]} />
         <meshStandardMaterial
-          color='#5f678f'
+          color="#5f678f"
           polygonOffset
           polygonOffsetFactor={-5}
           flatShading
@@ -40,15 +39,20 @@ const Ball = (props) => {
 const BallCanvas = ({ icon }) => {
   return (
     <Canvas
-      frameloop='demand'
-      dpr={[1, 2]}
-      gl={{ preserveDrawingBuffer: true }}
+      frameloop="always"             
+      dpr={[1, 2]}                   
+      gl={{
+        preserveDrawingBuffer: true,
+        powerPreference: "high-performance",  
+        antialias: false,            
+        alpha: true,                 
+      }}
+      camera={{ fov: 45 }}          
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls enableZoom={false} />
         <Ball imgUrl={icon} />
       </Suspense>
-
       <Preload all />
     </Canvas>
   );
