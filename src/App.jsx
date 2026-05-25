@@ -7,10 +7,7 @@ import About from './components/About'
 import Experience from './components/Experience'
 import Tech from './components/Tech'
 import Works from './components/Works'
-<<<<<<< HEAD
 import Feedbacks from './components/feedbacks'; 
-=======
->>>>>>> da5c8d0 (Force fix: Correcting Case Sensitivity for Feedbacks)
 import Contact from './components/Contact'
 import Feedbacks from './components/feedbacks';
 import StarsCanvas from "./components/canvas/Stars";
